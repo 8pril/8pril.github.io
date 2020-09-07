@@ -6,5 +6,62 @@
     <link>
     http://localhost:4000</link>
     
+      
+      <item>
+        <title>Record001</title>
+        
+          <description>&lt;p&gt;A record…&lt;/p&gt;
+</description>
+        
+        <pubDate>Mon, 07 Sep 2020 19:18:00 +0900</pubDate>
+        <link>
+        http://localhost:4000/record-001</link>
+        <guid isPermaLink="true">http://localhost:4000/record-001</guid>
+      </item>
+      
+    
+      
+      <item>
+        <title>Idea001</title>
+        
+          <description>&lt;p&gt;An idea…&lt;/p&gt;
+</description>
+        
+        <pubDate>Mon, 07 Sep 2020 19:18:00 +0900</pubDate>
+        <link>
+        http://localhost:4000/idea-001</link>
+        <guid isPermaLink="true">http://localhost:4000/idea-001</guid>
+      </item>
+      
+    
+      
+      <item>
+        <title>Test</title>
+        
+          <description>&lt;p&gt;test…&lt;/p&gt;
+</description>
+        
+        <pubDate>Mon, 07 Sep 2020 19:18:00 +0900</pubDate>
+        <link>
+        http://localhost:4000/record001</link>
+        <guid isPermaLink="true">http://localhost:4000/record001</guid>
+      </item>
+      
+    
+      
+      <item>
+        <title>Gettysburg Address</title>
+        
+          <description>&lt;p&gt;Fourscore and seven years ago our fathers brought forth on this continent, a new nation, conceived in Liberty, and dedicated to the proposition that all men are created equal.&lt;/p&gt;
+
+</description>
+        
+        <pubDate>Thu, 19 Nov 1863 19:18:00 +0900</pubDate>
+        <link>
+        http://localhost:4000/gettysburg-address</link>
+        <guid isPermaLink="true">http://localhost:4000/gettysburg-address</guid>
+      </item>
+      
+    
   </channel>
 </rss>

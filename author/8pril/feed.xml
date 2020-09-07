@@ -4,7 +4,7 @@
   <generator uri="https://jekyllrb.com/" version="3.7.4">Jekyll</generator>
   <link href="http://localhost:4000/author/8pril/feed.xml" rel="self" type="application/atom+xml" />
   <link href="http://localhost:4000/" rel="alternate" type="text/html" />
-  <updated>2020-09-07T21:14:06+09:00</updated>
+  <updated>2020-09-07T22:10:38+09:00</updated>
   <id>http://localhost:4000/author/8pril/feed.xml</id>
 
   
@@ -28,5 +28,107 @@
   
   
 
+  
+    <entry>
+      <title type="html">Test</title>
+      <link href="http://localhost:4000/record001" rel="alternate" type="text/html" title="Test" />
+      <published>2020-09-07T19:18:00+09:00</published>
+      <updated>2020-09-07T19:18:00+09:00</updated>
+      <id>http://localhost:4000/record001</id>
+      <content type="html" xml:base="http://localhost:4000/record001">&lt;p&gt;test…&lt;/p&gt;</content>
+
+      
+      
+      
+      
+      
+
+      <author>
+          <name>8pril</name>
+        
+        
+      </author>
+
+      
+
+      
+        <category term="records" />
+      
+
+      
+        <summary type="html">test…</summary>
+      
+
+      
+      
+    </entry>
+  
+    <entry>
+      <title type="html">Idea001</title>
+      <link href="http://localhost:4000/idea-001" rel="alternate" type="text/html" title="Idea001" />
+      <published>2020-09-07T19:18:00+09:00</published>
+      <updated>2020-09-07T19:18:00+09:00</updated>
+      <id>http://localhost:4000/idea-001</id>
+      <content type="html" xml:base="http://localhost:4000/idea-001">&lt;p&gt;An idea…&lt;/p&gt;</content>
+
+      
+      
+      
+      
+      
+
+      <author>
+          <name>8pril</name>
+        
+        
+      </author>
+
+      
+
+      
+        <category term="ideas" />
+      
+
+      
+        <summary type="html">An idea…</summary>
+      
+
+      
+      
+    </entry>
+  
+    <entry>
+      <title type="html">Record001</title>
+      <link href="http://localhost:4000/record-001" rel="alternate" type="text/html" title="Record001" />
+      <published>2020-09-07T19:18:00+09:00</published>
+      <updated>2020-09-07T19:18:00+09:00</updated>
+      <id>http://localhost:4000/record-001</id>
+      <content type="html" xml:base="http://localhost:4000/record-001">&lt;p&gt;A record…&lt;/p&gt;</content>
+
+      
+      
+      
+      
+      
+
+      <author>
+          <name>8pril</name>
+        
+        
+      </author>
+
+      
+
+      
+        <category term="records" />
+      
+
+      
+        <summary type="html">A record…</summary>
+      
+
+      
+      
+    </entry>
   
 </feed>

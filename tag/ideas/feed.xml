@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<feed xmlns="http://www.w3.org/2005/Atom" >
+  <generator uri="https://jekyllrb.com/" version="3.7.4">Jekyll</generator>
+  <link href="http://localhost:4000/tag/ideas/feed.xml" rel="self" type="application/atom+xml" />
+  <link href="http://localhost:4000/" rel="alternate" type="text/html" />
+  <updated>2020-09-07T22:10:38+09:00</updated>
+  <id>http://localhost:4000/tag/ideas/feed.xml</id>
+
+  
+  
+  
+
+  
+    <title type="html">8pril | </title>
+  
+
+  
+
+  
+
+  
+    
+      
+    
+  
+
+  
+  
+
+  
+    <entry>
+      <title type="html">Idea001</title>
+      <link href="http://localhost:4000/idea-001" rel="alternate" type="text/html" title="Idea001" />
+      <published>2020-09-07T19:18:00+09:00</published>
+      <updated>2020-09-07T19:18:00+09:00</updated>
+      <id>http://localhost:4000/idea-001</id>
+      <content type="html" xml:base="http://localhost:4000/idea-001">&lt;p&gt;An idea…&lt;/p&gt;</content>
+
+      
+      
+      
+      
+      
+
+      <author>
+          <name>8pril</name>
+        
+        
+      </author>
+
+      
+
+      
+        <category term="ideas" />
+      
+
+      
+        <summary type="html">An idea…</summary>
+      
+
+      
+      
+    </entry>
+  
+</feed>
