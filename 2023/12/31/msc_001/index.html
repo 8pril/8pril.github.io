@@ -1,0 +1,601 @@
+
+<!DOCTYPE html>
+<html lang="en">
+    
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="generator" content="April&#39;s Blog">
+    <title>딥러닝 모델의 주요 유형 - April&#39;s Blog</title>
+    <meta name="author" content="April Lee">
+    
+        <meta name="keywords" content="hexo,javascript,data science,machine learning,">
+    
+    
+    
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"April Lee","sameAs":[],"image":"profile.jpg"},"articleBody":"딥러닝 모델 주요 유형\n피드포워드 신경망 (Feed-Forward Neural Networks, FFNN)정의: 정보가 입력층에서 시작하여 은닉층을 거쳐 출력층으로 한 방향으로만 흐르는 신경망.예시: 다층 퍼셉트론(Multi-Layer Perceptron, MLP).특징: 순전파와 역전파를 통해 학습. 순환 또는 피드백 루프가 없음.\n순환 신경망 (Recurrent Neural Networks, RNN)정의: 정보가 순환되는 경로를 가지는 신경망. 시퀀스 데이터(시간 순서가 있는 데이터)를 처리하기 위해 설계됨.예시: 기본 RNN, 장단기 메모리(LSTM), 게이트 순환 유닛(GRU).특징: 이전 상태를 현재 상태로 피드백하여 시계열 데이터를 모델링. 시간 종속성 및 순차적 데이터를 잘 처리함.\n합성곱 신경망 (Convolutional Neural Networks, CNN)정의: 주로 이미지 데이터를 처리하기 위해 설계된 신경망. 합성곱 연산을 통해 특징을 추출.예시: LeNet, AlexNet, VGG, ResNet.특징: 합성곱 층과 풀링 층을 사용하여 공간적 계층 구조를 학습. 이미지 분류, 객체 검출 등에 사용됨.\n트랜스포머 (Transformers)정의: 주로 자연어 처리(NLP)에서 사용되는 신경망. 자기 주의 메커니즘(Self-Attention Mechanism)을 사용하여 입력 시퀀스의 모든 위치 간의 관계를 모델링.예시: BERT, GPT, T5.특징: 병렬 처리가 용이하며, 긴 시퀀스 간의 관계를 잘 학습함. 최근에는 NLP 외에도 다양한 분야에서 사용됨.\n자동 인코더 (Autoencoders)정의: 입력 데이터를 압축하여 저차원 표현(latent space)을 학습하고, 이를 다시 원래의 데이터로 복원하는 신경망.예시: 기본 자동 인코더, 변분 자동 인코더(VAE).특징: 데이터 압축, 이상 탐지, 생성 모델 등에 사용됨.\n생성적 적대 신경망 (Generative Adversarial Networks, GANs)정의: 두 개의 신경망(생성자와 판별자)이 경쟁적으로 학습하여 데이터를 생성하는 모델.예시: 기본 GAN, DCGAN, StyleGAN.특징: 새로운 데이터를 생성하는 데 사용됨. 이미지 생성, 스타일 변환 등 다양한 생성 작업에 응용됨.요약다양성: 딥러닝 모델은 FFNN 외에도 RNN, CNN, 트랜스포머, 자동 인코더, GAN 등 다양한 구조와 특성을 가집니다.적용 분야: 각 모델은 특정한 문제 유형에 맞게 설계되었으며, 데이터의 특성과 문제의 요구사항에 따라 적합한 모델을 선택해야 합니다.\n\n피드포워드 신경망 모델\n다층 퍼셉트론 (Multi-Layer Perceptron, MLP)구조: 입력층, 하나 이상의 은닉층, 출력층으로 구성된 신경망.특징: 각 층의 뉴런들은 이전 층의 모든 뉴런과 연결된 fully connected 구조를 가집니다. 비선형 활성화 함수(예: ReLU, Sigmoid, Tanh)를 사용하여 복잡한 패턴을 학습합니다.적용 분야: 기본적인 분류 문제, 회귀 문제 등.예시 코드 (Python, TensorFlow&#x2F;Keras):\n\n1234567891011121314151617from tensorflow.keras.models import Sequentialfrom tensorflow.keras.layers import Dense# 모델 생성model = Sequential()# 입력층과 첫 번째 은닉층model.add(Dense(units=64, activation=&#x27;relu&#x27;, input_shape=(input_dim,)))# 두 번째 은닉층model.add(Dense(units=64, activation=&#x27;relu&#x27;))# 출력층model.add(Dense(units=num_classes, activation=&#x27;softmax&#x27;))# 모델 컴파일model.compile(optimizer=&#x27;adam&#x27;, loss=&#x27;categorical_crossentropy&#x27;, metrics=[&#x27;accuracy&#x27;])# 모델 요약 출력model.summary()\n\n\n퍼셉트론 (Perceptron)구조: 단층 신경망으로, 입력층과 출력층만으로 구성됩니다.특징: 가장 기본적인 신경망 모델로, 단순한 선형 분류 문제에 사용됩니다.적용 분야: 기본적인 선형 분류 문제.예시 코드 (Python, scikit-learn):\n\n12345678from sklearn.linear_model import Perceptron# 모델 생성model = Perceptron()# 모델 훈련model.fit(X_train, y_train)# 예측y_pred = model.predict(X_test)\n\n\n선형 회귀 (Linear Regression)구조: 입력과 출력 사이의 선형 관계를 학습하는 단층 신경망.특징: 회귀 문제에 사용되며, 선형 방정식을 통해 예측합니다.적용 분야: 연속적인 숫자 예측 문제.예시 코드 (Python, scikit-learn):\n\n12345678from sklearn.linear_model import LinearRegression# 모델 생성model = LinearRegression()# 모델 훈련model.fit(X_train, y_train)# 예측y_pred = model.predict(X_test)\n\n\n로지스틱 회귀 (Logistic Regression)구조: 선형 회귀와 유사하지만, 시그모이드 함수를 사용하여 이진 분류 문제를 해결합니다.특징: 이진 분류 문제에 사용되며, 출력이 0과 1 사이의 확률 값으로 나타납니다.적용 분야: 이진 분류 문제.예시 코드 (Python, scikit-learn):\n\n12345678from sklearn.linear_model import LogisticRegression# 모델 생성model = LogisticRegression()# 모델 훈련model.fit(X_train, y_train)# 예측y_pred = model.predict(X_test)\n\n\n다층 퍼셉트론 (MLPClassifier) - scikit-learn 구현구조: 입력층, 여러 은닉층, 출력층을 가지며, fully connected layer로 구성된 신경망.특징: scikit-learn의 MLPClassifier는 다층 퍼셉트론을 간단하게 구현할 수 있는 도구를 제공합니다.적용 분야: 분류 문제.예시 코드 (Python, scikit-learn):\n\n12345678from sklearn.neural_network import MLPClassifier# 모델 생성model = MLPClassifier(hidden_layer_sizes=(64, 64), activation=&#x27;relu&#x27;, max_iter=1000)# 모델 훈련model.fit(X_train, y_train)# 예측y_pred = model.predict(X_test)\n","dateCreated":"2023-12-31T14:35:30+09:00","dateModified":"2024-07-20T13:45:58+09:00","datePublished":"2023-12-31T14:35:30+09:00","description":"딥러닝 모델 주요 유형\n피드포워드 신경망 (Feed-Forward Neural Networks, FFNN)정의: 정보가 입력층에서 시작하여 은닉층을 거쳐 출력층으로 한 방향으로만 흐르는 신경망.예시: 다층 퍼셉트론(Multi-Layer Perceptron, MLP).특징: 순전파와 역전파를 통해 학습. 순환 또는 피드백 루프가 없음.","headline":"딥러닝 모델의 주요 유형","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://8pril.github.io/2023/12/31/msc_001/"},"publisher":{"@type":"Organization","name":"April Lee","sameAs":[],"image":"profile.jpg","logo":{"@type":"ImageObject","url":"profile.jpg"}},"url":"https://8pril.github.io/2023/12/31/msc_001/"}</script>
+    <meta name="description" content="딥러닝 모델 주요 유형 피드포워드 신경망 (Feed-Forward Neural Networks, FFNN)정의: 정보가 입력층에서 시작하여 은닉층을 거쳐 출력층으로 한 방향으로만 흐르는 신경망.예시: 다층 퍼셉트론(Multi-Layer Perceptron, MLP).특징: 순전파와 역전파를 통해 학습. 순환 또는 피드백 루프가 없음.">
+<meta property="og:type" content="blog">
+<meta property="og:title" content="딥러닝 모델의 주요 유형">
+<meta property="og:url" content="https://8pril.github.io/2023/12/31/msc_001/index.html">
+<meta property="og:site_name" content="April&#39;s Blog">
+<meta property="og:description" content="딥러닝 모델 주요 유형 피드포워드 신경망 (Feed-Forward Neural Networks, FFNN)정의: 정보가 입력층에서 시작하여 은닉층을 거쳐 출력층으로 한 방향으로만 흐르는 신경망.예시: 다층 퍼셉트론(Multi-Layer Perceptron, MLP).특징: 순전파와 역전파를 통해 학습. 순환 또는 피드백 루프가 없음.">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2023-12-31T05:35:30.000Z">
+<meta property="article:modified_time" content="2024-07-20T04:45:58.495Z">
+<meta property="article:author" content="April Lee">
+<meta property="article:tag" content="hexo">
+<meta property="article:tag" content="javascript">
+<meta property="article:tag" content="data science">
+<meta property="article:tag" content="machine learning">
+<meta name="twitter:card" content="summary">
+    
+    
+        
+    
+    
+        <meta property="og:image" content="https://8pril.github.io/assets/images/profile.jpg"/>
+    
+    
+    
+    
+    <!--STYLES-->
+    
+<link rel="stylesheet" href="/assets/css/style-oe6pmhtecgpk141zte7urk6fz0voqiu1kgmkbtaihw7dncbn03msxqe79obs.min.css">
+
+    <!--STYLES END-->
+    
+
+    
+
+    
+        
+    
+</head>
+
+    <body>
+        <div id="blog">
+            <!-- Define author's picture -->
+
+
+    
+        
+            
+        
+    
+
+<header id="header" data-behavior="5">
+    <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+    <div class="header-title">
+        <a
+            class="header-title-link"
+            href="/"
+            aria-label=""
+        >
+            April&#39;s Blog
+        </a>
+    </div>
+    
+        
+            <a
+                class="header-right-picture "
+                href="#about"
+                aria-label="Open the link: /#about"
+            >
+        
+        
+            <img class="header-picture" src="/assets/images/profile.jpg" alt="Author&#39;s picture"/>
+        
+        </a>
+    
+</header>
+
+            <!-- Define author's picture -->
+
+
+
+        
+    
+
+<nav id="sidebar" data-behavior="5">
+    <div class="sidebar-container">
+        
+            <div class="sidebar-profile">
+                <a
+                    href="/#about"
+                    aria-label="Read more about the author"
+                >
+                    <img class="sidebar-profile-picture" src="/assets/images/profile.jpg" alt="Author&#39;s picture"/>
+                </a>
+                <h4 class="sidebar-profile-name">April Lee</h4>
+                
+                    <h5 class="sidebar-profile-bio"><p>author.bio</p>
+</h5>
+                
+            </div>
+        
+        
+            <ul class="sidebar-buttons">
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/"
+                            
+                            rel="noopener"
+                            title="Home"
+                        >
+                        <i class="sidebar-button-icon fa fa-home" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Home</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/all-categories"
+                            
+                            rel="noopener"
+                            title="Categories"
+                        >
+                        <i class="sidebar-button-icon fa fa-bookmark" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Categories</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/all-tags"
+                            
+                            rel="noopener"
+                            title="Tags"
+                        >
+                        <i class="sidebar-button-icon fa fa-tags" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Tags</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/all-archives"
+                            
+                            rel="noopener"
+                            title="Archives"
+                        >
+                        <i class="sidebar-button-icon fa fa-archive" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Archives</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link open-algolia-search"
+                            href="#search"
+                            
+                            rel="noopener"
+                            title="Search"
+                        >
+                        <i class="sidebar-button-icon fa fa-search" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Search</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="#about"
+                            
+                            rel="noopener"
+                            title="About"
+                        >
+                        <i class="sidebar-button-icon fa fa-question" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">About</span>
+                    </a>
+            </li>
+            
+        </ul>
+        
+            <ul class="sidebar-buttons">
+            
+        </ul>
+        
+    </div>
+</nav>
+
+            
+            <div id="main" data-behavior="5"
+                 class="
+                        hasCoverMetaIn
+                        ">
+                
+<article class="post">
+    
+    
+        <div class="post-header main-content-wrap text-left">
+    
+        <h1 class="post-title">
+            딥러닝 모델의 주요 유형
+        </h1>
+    
+    
+        <div class="post-meta">
+    <time datetime="2023-12-31T14:35:30+09:00">
+	
+		    Dec 31, 2023
+    	
+    </time>
+    
+        <span>in </span>
+        
+    <a class="category-link" href="/categories/Deep-Learning/">Deep Learning</a>
+
+
+    
+</div>
+
+    
+</div>
+
+    
+    <div class="post-content markdown">
+        <div class="main-content-wrap">
+            <h1 id="딥러닝-모델-주요-유형"><a href="#딥러닝-모델-주요-유형" class="headerlink" title="딥러닝 모델 주요 유형"></a>딥러닝 모델 주요 유형</h1><ol>
+<li><strong>피드포워드 신경망 (Feed-Forward Neural Networks, FFNN)</strong><br>정의: 정보가 입력층에서 시작하여 은닉층을 거쳐 출력층으로 한 방향으로만 흐르는 신경망.<br>예시: 다층 퍼셉트론(Multi-Layer Perceptron, MLP).<br>특징: 순전파와 역전파를 통해 학습. 순환 또는 피드백 루프가 없음.<span id="more"></span></li>
+<li><strong>순환 신경망 (Recurrent Neural Networks, RNN)</strong><br>정의: 정보가 순환되는 경로를 가지는 신경망. 시퀀스 데이터(시간 순서가 있는 데이터)를 처리하기 위해 설계됨.<br>예시: 기본 RNN, 장단기 메모리(LSTM), 게이트 순환 유닛(GRU).<br>특징: 이전 상태를 현재 상태로 피드백하여 시계열 데이터를 모델링. 시간 종속성 및 순차적 데이터를 잘 처리함.</li>
+<li><strong>합성곱 신경망 (Convolutional Neural Networks, CNN)</strong><br>정의: 주로 이미지 데이터를 처리하기 위해 설계된 신경망. 합성곱 연산을 통해 특징을 추출.<br>예시: LeNet, AlexNet, VGG, ResNet.<br>특징: 합성곱 층과 풀링 층을 사용하여 공간적 계층 구조를 학습. 이미지 분류, 객체 검출 등에 사용됨.</li>
+<li><strong>트랜스포머 (Transformers)</strong><br>정의: 주로 자연어 처리(NLP)에서 사용되는 신경망. 자기 주의 메커니즘(Self-Attention Mechanism)을 사용하여 입력 시퀀스의 모든 위치 간의 관계를 모델링.<br>예시: BERT, GPT, T5.<br>특징: 병렬 처리가 용이하며, 긴 시퀀스 간의 관계를 잘 학습함. 최근에는 NLP 외에도 다양한 분야에서 사용됨.</li>
+<li><strong>자동 인코더 (Autoencoders)</strong><br>정의: 입력 데이터를 압축하여 저차원 표현(latent space)을 학습하고, 이를 다시 원래의 데이터로 복원하는 신경망.<br>예시: 기본 자동 인코더, 변분 자동 인코더(VAE).<br>특징: 데이터 압축, 이상 탐지, 생성 모델 등에 사용됨.</li>
+<li><strong>생성적 적대 신경망 (Generative Adversarial Networks, GANs)</strong><br>정의: 두 개의 신경망(생성자와 판별자)이 경쟁적으로 학습하여 데이터를 생성하는 모델.<br>예시: 기본 GAN, DCGAN, StyleGAN.<br>특징: 새로운 데이터를 생성하는 데 사용됨. 이미지 생성, 스타일 변환 등 다양한 생성 작업에 응용됨.<br>요약<br>다양성: 딥러닝 모델은 FFNN 외에도 RNN, CNN, 트랜스포머, 자동 인코더, GAN 등 다양한 구조와 특성을 가집니다.<br>적용 분야: 각 모델은 특정한 문제 유형에 맞게 설계되었으며, 데이터의 특성과 문제의 요구사항에 따라 적합한 모델을 선택해야 합니다.</li>
+</ol>
+<h2 id="피드포워드-신경망-모델"><a href="#피드포워드-신경망-모델" class="headerlink" title="피드포워드 신경망 모델"></a>피드포워드 신경망 모델</h2><ol>
+<li>다층 퍼셉트론 (Multi-Layer Perceptron, MLP)<br>구조: 입력층, 하나 이상의 은닉층, 출력층으로 구성된 신경망.<br>특징: 각 층의 뉴런들은 이전 층의 모든 뉴런과 연결된 fully connected 구조를 가집니다. 비선형 활성화 함수(예: ReLU, Sigmoid, Tanh)를 사용하여 복잡한 패턴을 학습합니다.<br>적용 분야: 기본적인 분류 문제, 회귀 문제 등.<br>예시 코드 (Python, TensorFlow&#x2F;Keras):</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> tensorflow.keras.models <span class="keyword">import</span> Sequential</span><br><span class="line"><span class="keyword">from</span> tensorflow.keras.layers <span class="keyword">import</span> Dense</span><br><span class="line"></span><br><span class="line"><span class="comment"># 모델 생성</span></span><br><span class="line">model = Sequential()</span><br><span class="line"><span class="comment"># 입력층과 첫 번째 은닉층</span></span><br><span class="line">model.add(Dense(units=<span class="number">64</span>, activation=<span class="string">&#x27;relu&#x27;</span>, input_shape=(input_dim,)))</span><br><span class="line"><span class="comment"># 두 번째 은닉층</span></span><br><span class="line">model.add(Dense(units=<span class="number">64</span>, activation=<span class="string">&#x27;relu&#x27;</span>))</span><br><span class="line"><span class="comment"># 출력층</span></span><br><span class="line">model.add(Dense(units=num_classes, activation=<span class="string">&#x27;softmax&#x27;</span>))</span><br><span class="line"></span><br><span class="line"><span class="comment"># 모델 컴파일</span></span><br><span class="line">model.<span class="built_in">compile</span>(optimizer=<span class="string">&#x27;adam&#x27;</span>, loss=<span class="string">&#x27;categorical_crossentropy&#x27;</span>, metrics=[<span class="string">&#x27;accuracy&#x27;</span>])</span><br><span class="line"></span><br><span class="line"><span class="comment"># 모델 요약 출력</span></span><br><span class="line">model.summary()</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>퍼셉트론 (Perceptron)<br>구조: 단층 신경망으로, 입력층과 출력층만으로 구성됩니다.<br>특징: 가장 기본적인 신경망 모델로, 단순한 선형 분류 문제에 사용됩니다.<br>적용 분야: 기본적인 선형 분류 문제.<br>예시 코드 (Python, scikit-learn):</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.linear_model <span class="keyword">import</span> Perceptron</span><br><span class="line"></span><br><span class="line"><span class="comment"># 모델 생성</span></span><br><span class="line">model = Perceptron()</span><br><span class="line"><span class="comment"># 모델 훈련</span></span><br><span class="line">model.fit(X_train, y_train)</span><br><span class="line"><span class="comment"># 예측</span></span><br><span class="line">y_pred = model.predict(X_test)</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>선형 회귀 (Linear Regression)<br>구조: 입력과 출력 사이의 선형 관계를 학습하는 단층 신경망.<br>특징: 회귀 문제에 사용되며, 선형 방정식을 통해 예측합니다.<br>적용 분야: 연속적인 숫자 예측 문제.<br>예시 코드 (Python, scikit-learn):</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.linear_model <span class="keyword">import</span> LinearRegression</span><br><span class="line"></span><br><span class="line"><span class="comment"># 모델 생성</span></span><br><span class="line">model = LinearRegression()</span><br><span class="line"><span class="comment"># 모델 훈련</span></span><br><span class="line">model.fit(X_train, y_train)</span><br><span class="line"><span class="comment"># 예측</span></span><br><span class="line">y_pred = model.predict(X_test)</span><br></pre></td></tr></table></figure>
+
+<ol start="4">
+<li>로지스틱 회귀 (Logistic Regression)<br>구조: 선형 회귀와 유사하지만, 시그모이드 함수를 사용하여 이진 분류 문제를 해결합니다.<br>특징: 이진 분류 문제에 사용되며, 출력이 0과 1 사이의 확률 값으로 나타납니다.<br>적용 분야: 이진 분류 문제.<br>예시 코드 (Python, scikit-learn):</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.linear_model <span class="keyword">import</span> LogisticRegression</span><br><span class="line"></span><br><span class="line"><span class="comment"># 모델 생성</span></span><br><span class="line">model = LogisticRegression()</span><br><span class="line"><span class="comment"># 모델 훈련</span></span><br><span class="line">model.fit(X_train, y_train)</span><br><span class="line"><span class="comment"># 예측</span></span><br><span class="line">y_pred = model.predict(X_test)</span><br></pre></td></tr></table></figure>
+
+<ol start="5">
+<li>다층 퍼셉트론 (MLPClassifier) - scikit-learn 구현<br>구조: 입력층, 여러 은닉층, 출력층을 가지며, fully connected layer로 구성된 신경망.<br>특징: scikit-learn의 MLPClassifier는 다층 퍼셉트론을 간단하게 구현할 수 있는 도구를 제공합니다.<br>적용 분야: 분류 문제.<br>예시 코드 (Python, scikit-learn):</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.neural_network <span class="keyword">import</span> MLPClassifier</span><br><span class="line"></span><br><span class="line"><span class="comment"># 모델 생성</span></span><br><span class="line">model = MLPClassifier(hidden_layer_sizes=(<span class="number">64</span>, <span class="number">64</span>), activation=<span class="string">&#x27;relu&#x27;</span>, max_iter=<span class="number">1000</span>)</span><br><span class="line"><span class="comment"># 모델 훈련</span></span><br><span class="line">model.fit(X_train, y_train)</span><br><span class="line"><span class="comment"># 예측</span></span><br><span class="line">y_pred = model.predict(X_test)</span><br></pre></td></tr></table></figure>
+<h1 id="table-of-contents">Table of Contents</h1><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%EB%94%A5%EB%9F%AC%EB%8B%9D-%EB%AA%A8%EB%8D%B8-%EC%A3%BC%EC%9A%94-%EC%9C%A0%ED%98%95"><span class="toc-text">딥러닝 모델 주요 유형</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%ED%94%BC%EB%93%9C%ED%8F%AC%EC%9B%8C%EB%93%9C-%EC%8B%A0%EA%B2%BD%EB%A7%9D-%EB%AA%A8%EB%8D%B8"><span class="toc-text">피드포워드 신경망 모델</span></a></li></ol></li></ol>
+            
+
+
+        </div>
+    </div>
+    <div id="post-footer" class="post-footer main-content-wrap">
+        
+        
+            <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    
+                <a
+                    class="post-action-btn btn btn--default tooltip--top"
+                    href="/2023/12/31/d2l_001/"
+                    data-tooltip="Dive into Deep Learning | 1. Introduction"
+                    aria-label="PREVIOUS: Dive into Deep Learning | 1. Introduction"
+                >
+                    
+                        <i class="fa fa-angle-left" aria-hidden="true"></i>
+                        <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
+                    </a>
+            </li>
+            <li class="post-action">
+                
+                    <a
+                        class="post-action-btn btn btn--disabled"
+                        aria-hidden="true"
+                    >
+                        
+                        <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
+                        <i class="fa fa-angle-right" aria-hidden="true"></i>
+                    </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a
+                class="post-action-btn btn btn--default btn-open-shareoptions"
+                href="#btn-open-shareoptions"
+                aria-label="Share this post"
+            >
+                <i class="fa fa-share-alt" aria-hidden="true"></i>
+            </a>
+        </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a
+                    class="post-action-btn btn btn--default"
+                    target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://8pril.github.io/2023/12/31/msc_001/"
+                    title="Share on Facebook"
+                    aria-label="Share on Facebook"
+                >
+                    <i class="fab fa-facebook" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a
+                    class="post-action-btn btn btn--default"
+                    target="new" href="https://twitter.com/intent/tweet?text=https://8pril.github.io/2023/12/31/msc_001/"
+                    title="Share on Twitter"
+                    aria-label="Share on Twitter"
+                >
+                    <i class="fab fa-twitter" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a
+                    class="post-action-btn btn btn--default"
+                    target="new" href="https://plus.google.com/share?url=https://8pril.github.io/2023/12/31/msc_001/"
+                    title="Share on Google+"
+                    aria-label="Share on Google+"
+                >
+                    <i class="fab fa-google-plus" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+        
+            
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#table-of-contents" aria-label="Table of Contents">
+            
+                <i class="fa fa-list" aria-hidden="true"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+        
+        
+            
+        
+    </div>
+</article>
+
+
+
+                <footer id="footer" class="main-content-wrap">
+    <span class="copyrights">
+        Copyrights &copy; 2024 April Lee. All Rights Reserved.
+    </span>
+</footer>
+
+            </div>
+            
+                <div id="bottom-bar" class="post-bottom-bar" data-behavior="5">
+                    <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    
+                <a
+                    class="post-action-btn btn btn--default tooltip--top"
+                    href="/2023/12/31/d2l_001/"
+                    data-tooltip="Dive into Deep Learning | 1. Introduction"
+                    aria-label="PREVIOUS: Dive into Deep Learning | 1. Introduction"
+                >
+                    
+                        <i class="fa fa-angle-left" aria-hidden="true"></i>
+                        <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
+                    </a>
+            </li>
+            <li class="post-action">
+                
+                    <a
+                        class="post-action-btn btn btn--disabled"
+                        aria-hidden="true"
+                    >
+                        
+                        <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
+                        <i class="fa fa-angle-right" aria-hidden="true"></i>
+                    </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a
+                class="post-action-btn btn btn--default btn-open-shareoptions"
+                href="#btn-open-shareoptions"
+                aria-label="Share this post"
+            >
+                <i class="fa fa-share-alt" aria-hidden="true"></i>
+            </a>
+        </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a
+                    class="post-action-btn btn btn--default"
+                    target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://8pril.github.io/2023/12/31/msc_001/"
+                    title="Share on Facebook"
+                    aria-label="Share on Facebook"
+                >
+                    <i class="fab fa-facebook" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a
+                    class="post-action-btn btn btn--default"
+                    target="new" href="https://twitter.com/intent/tweet?text=https://8pril.github.io/2023/12/31/msc_001/"
+                    title="Share on Twitter"
+                    aria-label="Share on Twitter"
+                >
+                    <i class="fab fa-twitter" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a
+                    class="post-action-btn btn btn--default"
+                    target="new" href="https://plus.google.com/share?url=https://8pril.github.io/2023/12/31/msc_001/"
+                    title="Share on Google+"
+                    aria-label="Share on Google+"
+                >
+                    <i class="fab fa-google-plus" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+        
+            
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#table-of-contents" aria-label="Table of Contents">
+            
+                <i class="fa fa-list" aria-hidden="true"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+                </div>
+                
+    <div id="share-options-bar" class="share-options-bar" data-behavior="5">
+        <i id="btn-close-shareoptions" class="fa fa-times"></i>
+        <ul class="share-options">
+            
+                
+                
+                <li class="share-option">
+                    <a
+                        class="share-option-btn"
+                        target="new"
+                        href="https://www.facebook.com/sharer/sharer.php?u=https://8pril.github.io/2023/12/31/msc_001/"
+                        aria-label="Share on Facebook"
+                    >
+                        <i class="fab fa-facebook" aria-hidden="true"></i><span>Share on Facebook</span>
+                    </a>
+                </li>
+            
+                
+                
+                <li class="share-option">
+                    <a
+                        class="share-option-btn"
+                        target="new"
+                        href="https://twitter.com/intent/tweet?text=https://8pril.github.io/2023/12/31/msc_001/"
+                        aria-label="Share on Twitter"
+                    >
+                        <i class="fab fa-twitter" aria-hidden="true"></i><span>Share on Twitter</span>
+                    </a>
+                </li>
+            
+                
+                
+                <li class="share-option">
+                    <a
+                        class="share-option-btn"
+                        target="new"
+                        href="https://plus.google.com/share?url=https://8pril.github.io/2023/12/31/msc_001/"
+                        aria-label="Share on Google+"
+                    >
+                        <i class="fab fa-google-plus" aria-hidden="true"></i><span>Share on Google+</span>
+                    </a>
+                </li>
+            
+        </ul>
+    </div>
+
+
+            
+        </div>
+        
+
+
+    
+        
+    
+
+<div id="about">
+    <div id="about-card">
+        <div id="about-btn-close">
+            <i class="fa fa-times"></i>
+        </div>
+        
+            <img id="about-card-picture" src="/assets/images/profile.jpg" alt="Author&#39;s picture"/>
+        
+            <h4 id="about-card-name">April Lee</h4>
+        
+            <div id="about-card-bio"></div>
+        
+        
+            <div id="about-card-job">
+                <i class="fa fa-briefcase"></i>
+                <br/>
+                <p>Undefined</p>
+
+            </div>
+        
+        
+            <div id="about-card-location">
+                <i class="fa fa-map-marker-alt"></i>
+                <br/>
+                Seoul, Korea
+            </div>
+        
+    </div>
+</div>
+
+        
+        
+<div id="cover" style="background-image:url('/assets/images/cover.jpg');"></div>
+        <!--SCRIPTS-->
+
+<script src="/assets/js/script-11248vohh34kdb5akzskgpm91r7hq2frqwvepneuqpn484prc3ill6rrn6gx.min.js"></script>
+
+<!--SCRIPTS END-->
+
+
+    
+
+
+
+
+    </body>
+</html>

@@ -1,0 +1,706 @@
+
+<!DOCTYPE html>
+<html lang="en">
+    
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="generator" content="April&#39;s Blog">
+    <title>Dive into Deep Learning | 1. Introduction - April&#39;s Blog</title>
+    <meta name="author" content="April Lee">
+    
+        <meta name="keywords" content="hexo,javascript,data science,machine learning,">
+    
+    
+    
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"April Lee","sameAs":[],"image":"profile.jpg"},"articleBody":"Introduction머신러닝은 규칙이나 인간의 창의력만으로 해결하기 어려운 작업(ex. 날씨 예측, 텍스트 질문 대답, 이미지 식별, 추천 프로그램 등)에 적합하다. 알려지지 않은 원리를 계산하기 위해 경험을 통해 학습할 수 있는 알고리즘에 중점을 두고 있으며, 경험을 쌓을수록 성능이 향상된다.\n\nProgramming with Data란 원하는 작업을 직접 코딩하는 대신 레이블이 지정된 데이터셋을 제공하여 머신이 학습할 수 있는 프로그램을 작성하는 것을 말한다.\n\n\n\nKey Components\n머신 러닝의 핵심 구성 요소\nData\ninput이 fixed-length vectors일 때 vector의 길이 &#x3D; the dimensionality of the data\n모든 데이터가 fixed-length vectors로 표현될 수 있는 것은 아님\n딥러닝은 varying-length data를 처리하는 데 뛰어난 성능을 보임\n데이터가 많을수록 모델 훈련이 더 쉬워지고 사전 가정에 덜 의존할 수 있음\n데이터가 많아도 오류가 있거나 선택한 feature가 target 예측에 유용하지 않으면 학습이 실패할 수 있음\n\n\nModels\n딥러닝은 주로 연속적인 데이터 변환을 적용하는 강력한 모델 집합에 초점을 맞춘다는 점에서 기존 접근 방식과 차별화됨\n\n\nObjective Functions\n모델 성능을 측정하기 위한 measure 필요, 이를 objective function 또는 loss function이라 정의, 낮을수록 좋음\n수치 값 예측에서 가장 흔한 loss function &#x3D; squared error, classification의 objective &#x3D; error rate 최소화\nerrror rate 등은 미분이 불가능하거나 기타 복잡성으로 직접 최적화가 어렵기 때문에 surrogate objective를 최적화하기도 함\nloss를 모델 parameter의 함수로, 훈련 데이터셋을 상수로 두고 parameter 최적값들을 학습\ntraining 데이터에서 잘 수행되더라도 보이지 않은 데이터에 대해 일반화되지 못할 때, 이를 training 데이터에 overfit되었다고 말함\n\n\nOptimization Algorithms\n딥러닝에서 인기 있는 최적화 알고리즘은 gradient descent 기법을 기반으로 함\n각 단계에서 각 parameter를 미세하게 변경한 경우 loss가 어떻게 변화하는지 확인, loss를 줄이는 방향으로 parameter 업데이트\n\n\n\n\n\nKinds of Machine Learning ProblemsSupervised Learning\nfeature-label 쌍 &#x3D; example로 구성된 데이터셋을 모델에 제공하여 모델 parameter를 선택\n입력과 출력의 종류, 크기 및 양에 따라 모델링 결정이 크게 달라짐\n\n\nRegression\n가장 간단한 지도 학습 작업 중 하나로, 예측하려는 대상이 임의의 수치값을 가질 때 사용\n이 책에서는 대부분 squared error loss function을 최소화하는 것에 중점을 둠(데이터가 가우시안 노이즈에 의해 손상되었다고 가정)\n\n\nClassification\nexample이 어떤 category(또는 class)에 속하는지 예측하는 작업, 2개의 클래스만 있는 경우 binery classification\nclassification 문제의 가장 일반적인 loss function은 cross-entropy\n모델을 확률로 표현하여 각 class에 대한 확률을 출력하도록 하면 더 많은 불확실성 정보를 얻을 수 있음\n\n\nTagging\n각 example이 상호 배타적이지 않은 class 예측하는 학습 문제를 multi-label classification라고 함\n이미지에 여러 label이 할당될 수 있는 상황을 다루는데 유용, auto-tagging 문제가 대표적\n\n\nSearch\ninformation retrieval 분야에서 쿼리와 관련된 결과 집합 중 어떤 것을 특정 사용자에게 가장 눈에 띄게 표시해야 하는지를 결정하는 것이 목표\n현재 검색 엔진은 머신러닝 및 행동 모델을 사용하여 쿼리에 따른 관련성 점수를 얻음\n\n\nRecommender Systems\n검색 및 순위 지정과 관련된 문제 설정으로 목표는 비슷하나 사용자 맞춤화를 강조한다는 것이 차이점\n명시적 피드백 또는 암시적 피드백 제공, 예상 별점이나 특정 사용자가 특정 항목을 구매할 확률과 같은 점수를 추정\n검열, 인센티브, 피드백 루프를 어떻게 처리할 것인지에 관한 이러한 문제들은 여전히 연구 진행 중\n\n\nSequence Learning\n입력의 시퀀스를 수집하거나 출력의 시퀀스(또는 둘 다)를 방출하는 모델\nsequence-to-sequence 학습은 입력과 출력이 모두 variable-length sequences로 구성된 문제\n태그 지정 및 구문 분석(텍스트 시퀀스에 주석을 다는 작업, 입출력이 같은 순서로 정렬되어 있음), 음성-텍스트 변환(입력 &gt; 출력), 텍스트-음성 변환(입력 &lt; 출력), 기계 번역(입출력 시퀀스 길이가 다르며 정렬되어 있지 않음),\n\n\n\nUnsupervised and Self-Supervised Learning\nclustering - 데이터 그룹화\nsubspace estimation - 데이터 속성을 포착하는 소수의 파라미터 찾기, 의존성이 선형인 경우 principal component analysis\ncausality, probabilistic graphical model - 데이터의 원인, 연관 관계 설명\ndeep generative model - variational autoencoder 발명으로 시작, generative adversarial network 개발로 이어짐\nself-supervised learning - 텍스트 빈칸 채우기, 이미지 가려진 부분 예측, 주로 표현을 학습하며 이후 파인튜닝하여 사용\n\nInteracting with an Environment\nsupervised &amp; unsupervised learning은 알고리즘이 환경과 연결이 끊긴 후에 이루어지기 때문에 offline learning이라고도 함\noffline learning은 동적인 환경의 복잡성을 걱정할 필요 없이 패턴 인식만을 분리하여 고민할 수 있다는 장점이 있으나, 예측뿐만 아니라 행동을 선택하는 지능형 에이전트를 훈련하려면 에이전트의 행동이 향후 관찰에 어떤 영향을 미칠지 고려해야 함\n환경과의 상호작용을 고려하면 training 데이터와 test 데이터의 분포가 서로 다른 distribution shift 문제 발생\n에이전트가 환경과 상호 작용하는 학습 문제를 다루기 위한 프레임워크가 reinforcement learning\n\nReinforcement Learning\n로봇 공학, 대화 시스템, 심지어 비디오 게임용 인공 지능(AI) 개발에 적용\n강화 학습 문제에 딥러닝을 적용한 것이 Deep reinforcement learning\n프로세스 - 환경으로부터 관찰 정보 수신 ⇒ 동작 선택 ⇒ 매커니즘(actuator)을 통해 환경으로 다시 전송 ⇒ 각 루프가 끝나면 환경으로부터 보상을 받음\n에이전트의 행동은 policy에 의해 제어됨, policy는 환경 관찰을 행동으로 매핑하는 함수, Reinforcement Learning의 목표는 좋은 policy을 생성하는 것\n결과에 대해 어떤 행동을 칭찬하거나 비난할지 결정하는 credit assignment 문제, 부분적 관찰 가능성 문제를 해결해야 함\n현재 가장 좋은 전략을 policy 활용할지, 단기적인 보상을 포기하고 전략의 영역을 탐색할지 끊임없이 선택해야 함\n강화 학습의 문제\n환경이 완전히 관찰되는 경우 - Markov decision process\n상태가 이전 행동에 의존하지 않는 경우 - contextual bandit problem\n상태가 없고 처음 보상이 알려지지 않은 가능한 행동 집합만 있는 경우 - multi-armed bandit problem\n\n\n\nRoots\n딥러닝은 최근에 등장했지만 데이터로부터 학습하는 핵심 아이디어는 수세기 동안 연구되어 왔으며, 데이터를 분석하고 미래의 결과를 예측하고자 하는 인간의 욕구는 많은 자연과학 및 수학의 근간을 이루고 있음\n통계는 데이터의 가용성과 수집을 통해 비약적으로 발전, 그 외 정보&#x2F;계산 이론, 신경과학&#x2F;심리학이 머신러닝 발전에 영향\n\nThe Road to Deep Learning\n랜덤 액세스 메모리는 데이터 증가 속도를 따라잡지 못함 &amp; 계산 능력 향상은 데이터셋 증가를 앞지름 ⇒ 통계 모델이 메모리 효율성을 높여야 한다는 것을 의미\nGPU를 통해 컴퓨팅 예산이 증가함에 따라 parameter를 최적화하는 데 더 많은 컴퓨터 주기를 사용할 수 있게 됨 ⇒ deep neural network의 부상\n\nSuccess Stories\n인간 제작자를 의도적으로 조종할 수 있는 지각 있는 AI 시스템 개발은 먼 이야기\n첫째, AI 시스템은 특정 목표 지향적인 방식으로 설계, 훈련 및 배포되기 때문에 행동은 일반적인 지능처럼 보일 수 있지만, 그 설계의 기반은 규칙, 휴리스틱 및 통계 모델의 조합\n둘째, 현재로서는 스스로 개선하고 스스로 추론할 수 있으며 일반적인 작업을 해결하면서 아키텍처를 수정, 확장, 개선할 수 있는 _artificial general intelligence_을 위한 도구가 존재하지 않음\n\n\n통계 모델을 주의 없이 적용할 경우 인종, 성별, 연령 편견을 초래할 수 있으며, 결과적 의사결정을 자동화할 경우 절차적 공정성에 대한 합리적인 우려가 제기될 수 있음, 이러한 알고리즘을 신중하게 사용하는 것이 중요\n\nThe Essence of Deep Learning\n딥러닝의 차별점은 데이터로부터 표현된 여러 계층 각각에서 이뤄지는 연산이 공동으로 학습된다는 점\n딥러닝이 도입되면서 feature extractor가 자동으로 튜닝된 필터로 대체되어 정확도가 크게 향상\n딥러닝의 장점\n기존 학습 파이프라인의 끝에 있는 얕은 모델뿐만 아니라 노동 집약적인 피처 엔지니어링 프로세스도 대체할 수 있음\n도메인별 전처리의 상당 부분을 대체함으로써 이전에 컴퓨터 비전, 음성 인식, 자연어 처리, 의료 정보학 및 기타 애플리케이션 영역을 구분하던 경계를 없애고 다양한 문제를 해결할 수 있는 통합된 툴셋 제공\n\n\n\n","dateCreated":"2023-12-31T14:35:30+09:00","dateModified":"2024-01-01T13:40:12+09:00","datePublished":"2023-12-31T14:35:30+09:00","description":"Introduction머신러닝은 규칙이나 인간의 창의력만으로 해결하기 어려운 작업(ex. 날씨 예측, 텍스트 질문 대답, 이미지 식별, 추천 프로그램 등)에 적합하다. 알려지지 않은 원리를 계산하기 위해 경험을 통해 학습할 수 있는 알고리즘에 중점을 두고 있으며, 경험을 쌓을수록 성능이 향상된다.\n\nProgramming with Data란 원하는 작업을 직접 코딩하는 대신 레이블이 지정된 데이터셋을 제공하여 머신이 학습할 수 있는 프로그램을 작성하는 것을 말한다.\n","headline":"Dive into Deep Learning | 1. Introduction","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://8pril.github.io/2023/12/31/d2l_001/"},"publisher":{"@type":"Organization","name":"April Lee","sameAs":[],"image":"profile.jpg","logo":{"@type":"ImageObject","url":"profile.jpg"}},"url":"https://8pril.github.io/2023/12/31/d2l_001/"}</script>
+    <meta name="description" content="Introduction머신러닝은 규칙이나 인간의 창의력만으로 해결하기 어려운 작업(ex. 날씨 예측, 텍스트 질문 대답, 이미지 식별, 추천 프로그램 등)에 적합하다. 알려지지 않은 원리를 계산하기 위해 경험을 통해 학습할 수 있는 알고리즘에 중점을 두고 있으며, 경험을 쌓을수록 성능이 향상된다.  Programming with Data란 원하는 작업을 직">
+<meta property="og:type" content="blog">
+<meta property="og:title" content="Dive into Deep Learning | 1. Introduction">
+<meta property="og:url" content="https://8pril.github.io/2023/12/31/d2l_001/index.html">
+<meta property="og:site_name" content="April&#39;s Blog">
+<meta property="og:description" content="Introduction머신러닝은 규칙이나 인간의 창의력만으로 해결하기 어려운 작업(ex. 날씨 예측, 텍스트 질문 대답, 이미지 식별, 추천 프로그램 등)에 적합하다. 알려지지 않은 원리를 계산하기 위해 경험을 통해 학습할 수 있는 알고리즘에 중점을 두고 있으며, 경험을 쌓을수록 성능이 향상된다.  Programming with Data란 원하는 작업을 직">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://d2l.ai/_images/supervised-learning.svg">
+<meta property="og:image" content="https://d2l.ai/_images/data-collection.svg">
+<meta property="og:image" content="https://d2l.ai/_images/rl-environment.svg">
+<meta property="article:published_time" content="2023-12-31T05:35:30.000Z">
+<meta property="article:modified_time" content="2024-01-01T04:40:12.213Z">
+<meta property="article:author" content="April Lee">
+<meta property="article:tag" content="hexo">
+<meta property="article:tag" content="javascript">
+<meta property="article:tag" content="data science">
+<meta property="article:tag" content="machine learning">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://d2l.ai/_images/supervised-learning.svg">
+    
+    
+        
+    
+    
+        <meta property="og:image" content="https://8pril.github.io/assets/images/profile.jpg"/>
+    
+    
+    
+    
+    <!--STYLES-->
+    
+<link rel="stylesheet" href="/assets/css/style-oe6pmhtecgpk141zte7urk6fz0voqiu1kgmkbtaihw7dncbn03msxqe79obs.min.css">
+
+    <!--STYLES END-->
+    
+
+    
+
+    
+        
+    
+</head>
+
+    <body>
+        <div id="blog">
+            <!-- Define author's picture -->
+
+
+    
+        
+            
+        
+    
+
+<header id="header" data-behavior="5">
+    <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+    <div class="header-title">
+        <a
+            class="header-title-link"
+            href="/"
+            aria-label=""
+        >
+            April&#39;s Blog
+        </a>
+    </div>
+    
+        
+            <a
+                class="header-right-picture "
+                href="#about"
+                aria-label="Open the link: /#about"
+            >
+        
+        
+            <img class="header-picture" src="/assets/images/profile.jpg" alt="Author&#39;s picture"/>
+        
+        </a>
+    
+</header>
+
+            <!-- Define author's picture -->
+
+
+
+        
+    
+
+<nav id="sidebar" data-behavior="5">
+    <div class="sidebar-container">
+        
+            <div class="sidebar-profile">
+                <a
+                    href="/#about"
+                    aria-label="Read more about the author"
+                >
+                    <img class="sidebar-profile-picture" src="/assets/images/profile.jpg" alt="Author&#39;s picture"/>
+                </a>
+                <h4 class="sidebar-profile-name">April Lee</h4>
+                
+                    <h5 class="sidebar-profile-bio"><p>author.bio</p>
+</h5>
+                
+            </div>
+        
+        
+            <ul class="sidebar-buttons">
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/"
+                            
+                            rel="noopener"
+                            title="Home"
+                        >
+                        <i class="sidebar-button-icon fa fa-home" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Home</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/all-categories"
+                            
+                            rel="noopener"
+                            title="Categories"
+                        >
+                        <i class="sidebar-button-icon fa fa-bookmark" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Categories</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/all-tags"
+                            
+                            rel="noopener"
+                            title="Tags"
+                        >
+                        <i class="sidebar-button-icon fa fa-tags" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Tags</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/all-archives"
+                            
+                            rel="noopener"
+                            title="Archives"
+                        >
+                        <i class="sidebar-button-icon fa fa-archive" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Archives</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link open-algolia-search"
+                            href="#search"
+                            
+                            rel="noopener"
+                            title="Search"
+                        >
+                        <i class="sidebar-button-icon fa fa-search" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Search</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="#about"
+                            
+                            rel="noopener"
+                            title="About"
+                        >
+                        <i class="sidebar-button-icon fa fa-question" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">About</span>
+                    </a>
+            </li>
+            
+        </ul>
+        
+            <ul class="sidebar-buttons">
+            
+        </ul>
+        
+    </div>
+</nav>
+
+            
+            <div id="main" data-behavior="5"
+                 class="
+                        hasCoverMetaIn
+                        ">
+                
+<article class="post">
+    
+    
+        <div class="post-header main-content-wrap text-left">
+    
+        <h1 class="post-title">
+            Dive into Deep Learning | 1. Introduction
+        </h1>
+    
+    
+        <div class="post-meta">
+    <time datetime="2023-12-31T14:35:30+09:00">
+	
+		    Dec 31, 2023
+    	
+    </time>
+    
+        <span>in </span>
+        
+    <a class="category-link" href="/categories/Deep-Learning/">Deep Learning</a>
+
+
+    
+</div>
+
+    
+</div>
+
+    
+    <div class="post-content markdown">
+        <div class="main-content-wrap">
+            <h1 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h1><p>머신러닝은 규칙이나 인간의 창의력만으로 해결하기 어려운 작업(ex. 날씨 예측, 텍스트 질문 대답, 이미지 식별, 추천 프로그램 등)에 적합하다. 알려지지 않은 원리를 계산하기 위해 경험을 통해 학습할 수 있는 알고리즘에 중점을 두고 있으며, 경험을 쌓을수록 성능이 향상된다.</p>
+<blockquote>
+<p><strong>Programming with Data</strong>란 원하는 작업을 직접 코딩하는 대신 레이블이 지정된 데이터셋을 제공하여 머신이 학습할 수 있는 프로그램을 작성하는 것을 말한다.</p>
+</blockquote>
+<span id="more"></span>
+
+<h2 id="Key-Components"><a href="#Key-Components" class="headerlink" title="Key Components"></a>Key Components</h2><ul>
+<li>머신 러닝의 핵심 구성 요소<ol>
+<li><strong>Data</strong><ul>
+<li>input이 fixed-length vectors일 때 vector의 길이 &#x3D; the dimensionality of the data</li>
+<li>모든 데이터가 fixed-length vectors로 표현될 수 있는 것은 아님</li>
+<li>딥러닝은 varying-length data를 처리하는 데 뛰어난 성능을 보임</li>
+<li>데이터가 많을수록 모델 훈련이 더 쉬워지고 사전 가정에 덜 의존할 수 있음</li>
+<li>데이터가 많아도 오류가 있거나 선택한 feature가 target 예측에 유용하지 않으면 학습이 실패할 수 있음</li>
+</ul>
+</li>
+<li><strong>Models</strong><ul>
+<li>딥러닝은 주로 연속적인 데이터 변환을 적용하는 강력한 모델 집합에 초점을 맞춘다는 점에서 기존 접근 방식과 차별화됨</li>
+</ul>
+</li>
+<li><strong>Objective Functions</strong><ul>
+<li>모델 성능을 측정하기 위한 measure 필요, 이를 objective function 또는 loss function이라 정의, 낮을수록 좋음</li>
+<li>수치 값 예측에서 가장 흔한 loss function &#x3D; squared error, classification의 objective &#x3D; error rate 최소화</li>
+<li>errror rate 등은 미분이 불가능하거나 기타 복잡성으로 직접 최적화가 어렵기 때문에 surrogate objective를 최적화하기도 함</li>
+<li>loss를 모델 parameter의 함수로, 훈련 데이터셋을 상수로 두고 parameter 최적값들을 학습</li>
+<li>training 데이터에서 잘 수행되더라도 보이지 않은 데이터에 대해 일반화되지 못할 때, 이를 training 데이터에 overfit되었다고 말함</li>
+</ul>
+</li>
+<li><strong>Optimization Algorithms</strong><ul>
+<li>딥러닝에서 인기 있는 최적화 알고리즘은 gradient descent 기법을 기반으로 함</li>
+<li>각 단계에서 각 parameter를 미세하게 변경한 경우 loss가 어떻게 변화하는지 확인, loss를 줄이는 방향으로 parameter 업데이트</li>
+</ul>
+</li>
+</ol>
+</li>
+</ul>
+<h2 id="Kinds-of-Machine-Learning-Problems"><a href="#Kinds-of-Machine-Learning-Problems" class="headerlink" title="Kinds of Machine Learning Problems"></a>Kinds of Machine Learning Problems</h2><h3 id="Supervised-Learning"><a href="#Supervised-Learning" class="headerlink" title="Supervised Learning"></a>Supervised Learning</h3><ul>
+<li>feature-label 쌍 &#x3D; example로 구성된 데이터셋을 모델에 제공하여 모델 parameter를 선택</li>
+<li>입력과 출력의 종류, 크기 및 양에 따라 모델링 결정이 크게 달라짐<br><img src="https://d2l.ai/_images/supervised-learning.svg" alt="https://d2l.ai/_images/supervised-learning.svg"></li>
+</ul>
+<ol>
+<li><strong>Regression</strong><ul>
+<li>가장 간단한 지도 학습 작업 중 하나로, 예측하려는 대상이 임의의 수치값을 가질 때 사용</li>
+<li>이 책에서는 대부분 squared error loss function을 최소화하는 것에 중점을 둠(데이터가 가우시안 노이즈에 의해 손상되었다고 가정)</li>
+</ul>
+</li>
+<li><strong>Classification</strong><ul>
+<li>example이 어떤 category(또는 class)에 속하는지 예측하는 작업, 2개의 클래스만 있는 경우 binery classification</li>
+<li>classification 문제의 가장 일반적인 loss function은 cross-entropy</li>
+<li>모델을 확률로 표현하여 각 class에 대한 확률을 출력하도록 하면 더 많은 불확실성 정보를 얻을 수 있음</li>
+</ul>
+</li>
+<li><strong>Tagging</strong><ul>
+<li>각 example이 상호 배타적이지 않은 class 예측하는 학습 문제를 multi-label classification라고 함</li>
+<li>이미지에 여러 label이 할당될 수 있는 상황을 다루는데 유용, auto-tagging 문제가 대표적</li>
+</ul>
+</li>
+<li><strong>Search</strong><ul>
+<li>information retrieval 분야에서 쿼리와 관련된 결과 집합 중 어떤 것을 특정 사용자에게 가장 눈에 띄게 표시해야 하는지를 결정하는 것이 목표</li>
+<li>현재 검색 엔진은 머신러닝 및 행동 모델을 사용하여 쿼리에 따른 관련성 점수를 얻음</li>
+</ul>
+</li>
+<li><strong>Recommender Systems</strong><ul>
+<li>검색 및 순위 지정과 관련된 문제 설정으로 목표는 비슷하나 사용자 맞춤화를 강조한다는 것이 차이점</li>
+<li>명시적 피드백 또는 암시적 피드백 제공, 예상 별점이나 특정 사용자가 특정 항목을 구매할 확률과 같은 점수를 추정</li>
+<li>검열, 인센티브, 피드백 루프를 어떻게 처리할 것인지에 관한 이러한 문제들은 여전히 연구 진행 중</li>
+</ul>
+</li>
+<li><strong>Sequence Learning</strong><ul>
+<li>입력의 시퀀스를 수집하거나 출력의 시퀀스(또는 둘 다)를 방출하는 모델</li>
+<li>sequence-to-sequence 학습은 입력과 출력이 모두 variable-length sequences로 구성된 문제</li>
+<li>태그 지정 및 구문 분석(텍스트 시퀀스에 주석을 다는 작업, 입출력이 같은 순서로 정렬되어 있음), 음성-텍스트 변환(입력 &gt; 출력), 텍스트-음성 변환(입력 &lt; 출력), 기계 번역(입출력 시퀀스 길이가 다르며 정렬되어 있지 않음),</li>
+</ul>
+</li>
+</ol>
+<h3 id="Unsupervised-and-Self-Supervised-Learning"><a href="#Unsupervised-and-Self-Supervised-Learning" class="headerlink" title="Unsupervised and Self-Supervised Learning"></a>Unsupervised and Self-Supervised Learning</h3><ol>
+<li>clustering - 데이터 그룹화</li>
+<li>subspace estimation - 데이터 속성을 포착하는 소수의 파라미터 찾기, 의존성이 선형인 경우 principal component analysis</li>
+<li>causality, probabilistic graphical model - 데이터의 원인, 연관 관계 설명</li>
+<li>deep generative model - variational autoencoder 발명으로 시작, generative adversarial network 개발로 이어짐</li>
+<li>self-supervised learning - 텍스트 빈칸 채우기, 이미지 가려진 부분 예측, 주로 표현을 학습하며 이후 파인튜닝하여 사용</li>
+</ol>
+<h3 id="Interacting-with-an-Environment"><a href="#Interacting-with-an-Environment" class="headerlink" title="Interacting with an Environment"></a>Interacting with an Environment</h3><ul>
+<li>supervised &amp; unsupervised learning은 알고리즘이 환경과 연결이 끊긴 후에 이루어지기 때문에 offline learning이라고도 함<br><img src="https://d2l.ai/_images/data-collection.svg" alt="https://d2l.ai/_images/data-collection.svg"></li>
+<li>offline learning은 동적인 환경의 복잡성을 걱정할 필요 없이 패턴 인식만을 분리하여 고민할 수 있다는 장점이 있으나, 예측뿐만 아니라 행동을 선택하는 지능형 에이전트를 훈련하려면 에이전트의 행동이 향후 관찰에 어떤 영향을 미칠지 고려해야 함</li>
+<li>환경과의 상호작용을 고려하면 training 데이터와 test 데이터의 분포가 서로 다른 distribution shift 문제 발생</li>
+<li>에이전트가 환경과 상호 작용하는 학습 문제를 다루기 위한 프레임워크가 reinforcement learning</li>
+</ul>
+<h3 id="Reinforcement-Learning"><a href="#Reinforcement-Learning" class="headerlink" title="Reinforcement Learning"></a>Reinforcement Learning</h3><ul>
+<li>로봇 공학, 대화 시스템, 심지어 비디오 게임용 인공 지능(AI) 개발에 적용</li>
+<li>강화 학습 문제에 딥러닝을 적용한 것이 Deep reinforcement learning</li>
+<li>프로세스 - 환경으로부터 관찰 정보 수신 ⇒ 동작 선택 ⇒ 매커니즘(actuator)을 통해 환경으로 다시 전송 ⇒ 각 루프가 끝나면 환경으로부터 보상을 받음<br><img src="https://d2l.ai/_images/rl-environment.svg" alt="https://d2l.ai/_images/rl-environment.svg"></li>
+<li>에이전트의 행동은 policy에 의해 제어됨, policy는 환경 관찰을 행동으로 매핑하는 함수, Reinforcement Learning의 목표는 좋은 policy을 생성하는 것</li>
+<li>결과에 대해 어떤 행동을 칭찬하거나 비난할지 결정하는 credit assignment 문제, 부분적 관찰 가능성 문제를 해결해야 함</li>
+<li>현재 가장 좋은 전략을 policy 활용할지, 단기적인 보상을 포기하고 전략의 영역을 탐색할지 끊임없이 선택해야 함</li>
+<li>강화 학습의 문제<ul>
+<li>환경이 완전히 관찰되는 경우 - Markov decision process</li>
+<li>상태가 이전 행동에 의존하지 않는 경우 - contextual bandit problem</li>
+<li>상태가 없고 처음 보상이 알려지지 않은 가능한 행동 집합만 있는 경우 - multi-armed bandit problem</li>
+</ul>
+</li>
+</ul>
+<h2 id="Roots"><a href="#Roots" class="headerlink" title="Roots"></a>Roots</h2><ul>
+<li>딥러닝은 최근에 등장했지만 데이터로부터 학습하는 핵심 아이디어는 수세기 동안 연구되어 왔으며, 데이터를 분석하고 미래의 결과를 예측하고자 하는 인간의 욕구는 많은 자연과학 및 수학의 근간을 이루고 있음</li>
+<li>통계는 데이터의 가용성과 수집을 통해 비약적으로 발전, 그 외 정보&#x2F;계산 이론, 신경과학&#x2F;심리학이 머신러닝 발전에 영향</li>
+</ul>
+<h2 id="The-Road-to-Deep-Learning"><a href="#The-Road-to-Deep-Learning" class="headerlink" title="The Road to Deep Learning"></a>The Road to Deep Learning</h2><ul>
+<li>랜덤 액세스 메모리는 데이터 증가 속도를 따라잡지 못함 &amp; 계산 능력 향상은 데이터셋 증가를 앞지름 ⇒ 통계 모델이 메모리 효율성을 높여야 한다는 것을 의미</li>
+<li>GPU를 통해 컴퓨팅 예산이 증가함에 따라 parameter를 최적화하는 데 더 많은 컴퓨터 주기를 사용할 수 있게 됨 ⇒ deep neural network의 부상</li>
+</ul>
+<h2 id="Success-Stories"><a href="#Success-Stories" class="headerlink" title="Success Stories"></a>Success Stories</h2><ul>
+<li>인간 제작자를 의도적으로 조종할 수 있는 지각 있는 AI 시스템 개발은 먼 이야기<ul>
+<li>첫째, AI 시스템은 특정 목표 지향적인 방식으로 설계, 훈련 및 배포되기 때문에 행동은 일반적인 지능처럼 보일 수 있지만, 그 설계의 기반은 규칙, 휴리스틱 및 통계 모델의 조합</li>
+<li>둘째, 현재로서는 스스로 개선하고 스스로 추론할 수 있으며 일반적인 작업을 해결하면서 아키텍처를 수정, 확장, 개선할 수 있는 _artificial general intelligence_을 위한 도구가 존재하지 않음</li>
+</ul>
+</li>
+<li>통계 모델을 주의 없이 적용할 경우 인종, 성별, 연령 편견을 초래할 수 있으며, 결과적 의사결정을 자동화할 경우 절차적 공정성에 대한 합리적인 우려가 제기될 수 있음, 이러한 알고리즘을 신중하게 사용하는 것이 중요</li>
+</ul>
+<h2 id="The-Essence-of-Deep-Learning"><a href="#The-Essence-of-Deep-Learning" class="headerlink" title="The Essence of Deep Learning"></a>The Essence of Deep Learning</h2><ul>
+<li>딥러닝의 차별점은 데이터로부터 표현된 여러 계층 각각에서 이뤄지는 연산이 공동으로 학습된다는 점</li>
+<li>딥러닝이 도입되면서 feature extractor가 자동으로 튜닝된 필터로 대체되어 정확도가 크게 향상</li>
+<li>딥러닝의 장점<ul>
+<li>기존 학습 파이프라인의 끝에 있는 얕은 모델뿐만 아니라 노동 집약적인 피처 엔지니어링 프로세스도 대체할 수 있음</li>
+<li>도메인별 전처리의 상당 부분을 대체함으로써 이전에 컴퓨터 비전, 음성 인식, 자연어 처리, 의료 정보학 및 기타 애플리케이션 영역을 구분하던 경계를 없애고 다양한 문제를 해결할 수 있는 통합된 툴셋 제공</li>
+</ul>
+</li>
+</ul>
+<h1 id="table-of-contents">Table of Contents</h1><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Introduction"><span class="toc-text">Introduction</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Key-Components"><span class="toc-text">Key Components</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Kinds-of-Machine-Learning-Problems"><span class="toc-text">Kinds of Machine Learning Problems</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Supervised-Learning"><span class="toc-text">Supervised Learning</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Unsupervised-and-Self-Supervised-Learning"><span class="toc-text">Unsupervised and Self-Supervised Learning</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Interacting-with-an-Environment"><span class="toc-text">Interacting with an Environment</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Reinforcement-Learning"><span class="toc-text">Reinforcement Learning</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Roots"><span class="toc-text">Roots</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#The-Road-to-Deep-Learning"><span class="toc-text">The Road to Deep Learning</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Success-Stories"><span class="toc-text">Success Stories</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#The-Essence-of-Deep-Learning"><span class="toc-text">The Essence of Deep Learning</span></a></li></ol></li></ol>
+            
+
+
+        </div>
+    </div>
+    <div id="post-footer" class="post-footer main-content-wrap">
+        
+        
+            <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    
+                <a
+                    class="post-action-btn btn btn--default tooltip--top"
+                    href="/2024/01/01/d2l_002/"
+                    data-tooltip="Dive into Deep Learning | 2. Preliminaries | 2.1 Data Manipulation"
+                    aria-label="PREVIOUS: Dive into Deep Learning | 2. Preliminaries | 2.1 Data Manipulation"
+                >
+                    
+                        <i class="fa fa-angle-left" aria-hidden="true"></i>
+                        <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
+                    </a>
+            </li>
+            <li class="post-action">
+                
+                    
+                <a
+                    class="post-action-btn btn btn--default tooltip--top"
+                    href="/2023/12/31/msc_001/"
+                    data-tooltip="딥러닝 모델의 주요 유형"
+                    aria-label="NEXT: 딥러닝 모델의 주요 유형"
+                >
+                    
+                        <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
+                        <i class="fa fa-angle-right" aria-hidden="true"></i>
+                    </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a
+                class="post-action-btn btn btn--default btn-open-shareoptions"
+                href="#btn-open-shareoptions"
+                aria-label="Share this post"
+            >
+                <i class="fa fa-share-alt" aria-hidden="true"></i>
+            </a>
+        </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a
+                    class="post-action-btn btn btn--default"
+                    target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://8pril.github.io/2023/12/31/d2l_001/"
+                    title="Share on Facebook"
+                    aria-label="Share on Facebook"
+                >
+                    <i class="fab fa-facebook" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a
+                    class="post-action-btn btn btn--default"
+                    target="new" href="https://twitter.com/intent/tweet?text=https://8pril.github.io/2023/12/31/d2l_001/"
+                    title="Share on Twitter"
+                    aria-label="Share on Twitter"
+                >
+                    <i class="fab fa-twitter" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a
+                    class="post-action-btn btn btn--default"
+                    target="new" href="https://plus.google.com/share?url=https://8pril.github.io/2023/12/31/d2l_001/"
+                    title="Share on Google+"
+                    aria-label="Share on Google+"
+                >
+                    <i class="fab fa-google-plus" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+        
+            
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#table-of-contents" aria-label="Table of Contents">
+            
+                <i class="fa fa-list" aria-hidden="true"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+        
+        
+            
+        
+    </div>
+</article>
+
+
+
+                <footer id="footer" class="main-content-wrap">
+    <span class="copyrights">
+        Copyrights &copy; 2024 April Lee. All Rights Reserved.
+    </span>
+</footer>
+
+            </div>
+            
+                <div id="bottom-bar" class="post-bottom-bar" data-behavior="5">
+                    <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    
+                <a
+                    class="post-action-btn btn btn--default tooltip--top"
+                    href="/2024/01/01/d2l_002/"
+                    data-tooltip="Dive into Deep Learning | 2. Preliminaries | 2.1 Data Manipulation"
+                    aria-label="PREVIOUS: Dive into Deep Learning | 2. Preliminaries | 2.1 Data Manipulation"
+                >
+                    
+                        <i class="fa fa-angle-left" aria-hidden="true"></i>
+                        <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
+                    </a>
+            </li>
+            <li class="post-action">
+                
+                    
+                <a
+                    class="post-action-btn btn btn--default tooltip--top"
+                    href="/2023/12/31/msc_001/"
+                    data-tooltip="딥러닝 모델의 주요 유형"
+                    aria-label="NEXT: 딥러닝 모델의 주요 유형"
+                >
+                    
+                        <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
+                        <i class="fa fa-angle-right" aria-hidden="true"></i>
+                    </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a
+                class="post-action-btn btn btn--default btn-open-shareoptions"
+                href="#btn-open-shareoptions"
+                aria-label="Share this post"
+            >
+                <i class="fa fa-share-alt" aria-hidden="true"></i>
+            </a>
+        </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a
+                    class="post-action-btn btn btn--default"
+                    target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://8pril.github.io/2023/12/31/d2l_001/"
+                    title="Share on Facebook"
+                    aria-label="Share on Facebook"
+                >
+                    <i class="fab fa-facebook" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a
+                    class="post-action-btn btn btn--default"
+                    target="new" href="https://twitter.com/intent/tweet?text=https://8pril.github.io/2023/12/31/d2l_001/"
+                    title="Share on Twitter"
+                    aria-label="Share on Twitter"
+                >
+                    <i class="fab fa-twitter" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a
+                    class="post-action-btn btn btn--default"
+                    target="new" href="https://plus.google.com/share?url=https://8pril.github.io/2023/12/31/d2l_001/"
+                    title="Share on Google+"
+                    aria-label="Share on Google+"
+                >
+                    <i class="fab fa-google-plus" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+        
+            
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#table-of-contents" aria-label="Table of Contents">
+            
+                <i class="fa fa-list" aria-hidden="true"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+                </div>
+                
+    <div id="share-options-bar" class="share-options-bar" data-behavior="5">
+        <i id="btn-close-shareoptions" class="fa fa-times"></i>
+        <ul class="share-options">
+            
+                
+                
+                <li class="share-option">
+                    <a
+                        class="share-option-btn"
+                        target="new"
+                        href="https://www.facebook.com/sharer/sharer.php?u=https://8pril.github.io/2023/12/31/d2l_001/"
+                        aria-label="Share on Facebook"
+                    >
+                        <i class="fab fa-facebook" aria-hidden="true"></i><span>Share on Facebook</span>
+                    </a>
+                </li>
+            
+                
+                
+                <li class="share-option">
+                    <a
+                        class="share-option-btn"
+                        target="new"
+                        href="https://twitter.com/intent/tweet?text=https://8pril.github.io/2023/12/31/d2l_001/"
+                        aria-label="Share on Twitter"
+                    >
+                        <i class="fab fa-twitter" aria-hidden="true"></i><span>Share on Twitter</span>
+                    </a>
+                </li>
+            
+                
+                
+                <li class="share-option">
+                    <a
+                        class="share-option-btn"
+                        target="new"
+                        href="https://plus.google.com/share?url=https://8pril.github.io/2023/12/31/d2l_001/"
+                        aria-label="Share on Google+"
+                    >
+                        <i class="fab fa-google-plus" aria-hidden="true"></i><span>Share on Google+</span>
+                    </a>
+                </li>
+            
+        </ul>
+    </div>
+
+
+            
+        </div>
+        
+
+
+    
+        
+    
+
+<div id="about">
+    <div id="about-card">
+        <div id="about-btn-close">
+            <i class="fa fa-times"></i>
+        </div>
+        
+            <img id="about-card-picture" src="/assets/images/profile.jpg" alt="Author&#39;s picture"/>
+        
+            <h4 id="about-card-name">April Lee</h4>
+        
+            <div id="about-card-bio"></div>
+        
+        
+            <div id="about-card-job">
+                <i class="fa fa-briefcase"></i>
+                <br/>
+                <p>Undefined</p>
+
+            </div>
+        
+        
+            <div id="about-card-location">
+                <i class="fa fa-map-marker-alt"></i>
+                <br/>
+                Seoul, Korea
+            </div>
+        
+    </div>
+</div>
+
+        
+        
+<div id="cover" style="background-image:url('/assets/images/cover.jpg');"></div>
+        <!--SCRIPTS-->
+
+<script src="/assets/js/script-11248vohh34kdb5akzskgpm91r7hq2frqwvepneuqpn484prc3ill6rrn6gx.min.js"></script>
+
+<!--SCRIPTS END-->
+
+
+    
+
+
+
+
+    </body>
+</html>
